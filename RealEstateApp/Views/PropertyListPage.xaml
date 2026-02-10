@@ -6,95 +6,115 @@
     xmlns:fa="clr-namespace:FontAwesome"
     xmlns:models="clr-namespace:RealEstateApp.Models"
     xmlns:vm="clr-namespace:RealEstateApp.ViewModels"
-    Title="PropertyListPage"
+    Title="Property List"
+    BackgroundColor="#F5F5F5"
     x:DataType="vm:PropertyListPageViewModel">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" />
+        <ToolbarItem Text="Add" Command="{Binding GoToAddPropertyCommand}" />
     </ContentPage.ToolbarItems>
 
-    <RefreshView>
-
+    <RefreshView Command="{Binding GetPropertiesCommand}" IsRefreshing="{Binding IsRefreshing}">
         <CollectionView
-            BackgroundColor="LightGray"
+            BackgroundColor="#F5F5F5"
             ItemsSource="{Binding PropertiesCollection}"
             SelectionMode="None">
-
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:PropertyListItem">
-                    <Grid Padding="5">
-                        <Frame HasShadow="True">
-                            <Frame.GestureRecognizers>
+                    <Grid Padding="10" BackgroundColor="#F5F5F5">
+                        <Border
+                            Padding="0"
+                            BackgroundColor="White"
+                            Stroke="#E0E0E0"
+                            StrokeThickness="1">
+                            <Border.Shadow>
+                                <Shadow Brush="Black" Offset="0,2" Opacity="0.2" Radius="4" />
+                            </Border.Shadow>
+                            <Border.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PropertyListPageViewModel}}, Path=GoToDetailsCommand}" CommandParameter="{Binding .}" />
-                            </Frame.GestureRecognizers>
+                            </Border.GestureRecognizers>
                             <Grid
-                                Margin="0"
                                 Padding="0"
-                                BackgroundColor="White"
-                                ColumnDefinitions="Auto, *">
+                                ColumnDefinitions="Auto, *"
+                                RowDefinitions="*">
                                 <Image
                                     Grid.Column="0"
-                                    Margin="0,0,10,0"
-                                    Aspect="AspectFit"
+                                    Margin="0"
+                                    Aspect="AspectFill"
                                     HeightRequest="120"
-                                    HorizontalOptions="Start"
+                                    WidthRequest="120"
                                     Source="{Binding Property.MainImageUrl}" />
                                 <Grid
                                     Grid.Column="1"
-                                    Margin="0,10,10,0"
+                                    Padding="12"
+                                    BackgroundColor="White"
                                     RowDefinitions="Auto, Auto, Auto, Auto"
-                                    RowSpacing="10">
+                                    RowSpacing="8">
                                     <Label
                                         Grid.Row="0"
                                         FontAttributes="Bold"
-                                        FontSize="14"
+                                        FontSize="16"
                                         LineBreakMode="TailTruncation"
-                                        Text="{Binding Property.Address}" />
+                                        Text="{Binding Property.Address}"
+                                        TextColor="#1F1F1F" />
                                     <Label
                                         Grid.Row="1"
-                                        FontSize="13"
-                                        LineBreakMode="NoWrap"
-                                        Text="{Binding Property.Price, StringFormat='{0:C0}'}" />
-                                    <Grid Grid.Row="2" ColumnDefinitions="*, *, *, *, *, *">
+                                        FontAttributes="Bold"
+                                        FontSize="15"
+                                        Text="{Binding Property.Price, StringFormat='{0:C0}'}"
+                                        TextColor="#2E7D32" />
+                                    <Grid
+                                        Grid.Row="2"
+                                        ColumnDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+                                        ColumnSpacing="8">
                                         <Label
                                             Grid.Column="0"
                                             FontFamily="FA-solid"
-                                            FontSize="15"
-                                            Text="{x:Static fa:IconFont.Bed}" />
+                                            FontSize="14"
+                                            Text="{x:Static fa:IconFont.Bed}"
+                                            TextColor="#757575"
+                                            VerticalOptions="Center" />
                                         <Label
                                             Grid.Column="1"
                                             FontSize="13"
-                                            Text="{Binding Property.Beds}" />
+                                            Text="{Binding Property.Beds}"
+                                            TextColor="#424242" />
                                         <Label
                                             Grid.Column="2"
                                             FontFamily="FA-solid"
-                                            FontSize="15"
-                                            Text="{x:Static fa:IconFont.Bath}" />
+                                            FontSize="14"
+                                            Text="{x:Static fa:IconFont.Bath}"
+                                            TextColor="#757575"
+                                            VerticalOptions="Center" />
                                         <Label
                                             Grid.Column="3"
                                             FontSize="13"
-                                            Text="{Binding Property.Baths}" />
+                                            Text="{Binding Property.Baths}"
+                                            TextColor="#424242" />
                                         <Label
                                             Grid.Column="4"
                                             FontFamily="FA-solid"
-                                            FontSize="15"
-                                            Text="{x:Static fa:IconFont.Parking}" />
+                                            FontSize="14"
+                                            Text="{x:Static fa:IconFont.Parking}"
+                                            TextColor="#757575"
+                                            VerticalOptions="Center" />
                                         <Label
                                             Grid.Column="5"
                                             FontSize="13"
-                                            Text="{Binding Property.Parking}" />
+                                            Text="{Binding Property.Parking}"
+                                            TextColor="#424242" />
                                     </Grid>
                                     <Label
                                         Grid.Row="3"
-                                        FontSize="13"
-                                        Text="{Binding Property.LandSize, StringFormat='Land Size: {0} &#x33a1;'}" />
+                                        FontSize="12"
+                                        Text="{Binding Property.LandSize, StringFormat='Land Size: {0} &#x33a1;'}"
+                                        TextColor="#757575" />
                                 </Grid>
                             </Grid>
-                        </Frame>
+                        </Border>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-
         </CollectionView>
     </RefreshView>
 

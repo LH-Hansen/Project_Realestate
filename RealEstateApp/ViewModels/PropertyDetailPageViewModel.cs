@@ -17,10 +17,8 @@ public class PropertyDetailPageViewModel : BaseViewModel
     Property property;
     public Property Property { get => property; set { SetProperty(ref property, value); } }
 
-
     Agent agent;
     public Agent Agent { get => agent; set { SetProperty(ref agent, value); } }
-
 
     PropertyListItem propertyListItem;
     public PropertyListItem PropertyListItem
@@ -28,7 +26,6 @@ public class PropertyDetailPageViewModel : BaseViewModel
         set
         {
             SetProperty(ref propertyListItem, value);
-           
             Property = propertyListItem.Property;
             Agent = service.GetAgents().FirstOrDefault(x => x.Id == Property.AgentId);
         }
@@ -38,6 +35,12 @@ public class PropertyDetailPageViewModel : BaseViewModel
     public ICommand EditPropertyCommand => editPropertyCommand ??= new Command(async () => await GotoEditProperty());
     async Task GotoEditProperty()
     {
-        
+        if (Property == null)
+            return;
+
+        await Shell.Current.GoToAsync($"{nameof(AddEditPropertyPage)}?mode=editproperty", true, new Dictionary<string, object>
+        {
+            {"MyProperty", Property }
+        });
     }
 }
