@@ -25,10 +25,10 @@ public class PropertyListPageViewModel : BaseViewModel
         set => SetProperty(ref isRefreshing, value);
     }
 
-    //private Command getPropertiesCommand;
-    //public ICommand GetPropertiesCommand => getPropertiesCommand ??= new Command(async () => await GetPropertiesAsync());
+    private Command getPropertiesCommand;
+    public ICommand GetPropertiesCommand => getPropertiesCommand ??= new Command(async () => await GetPropertiesAsync());
 
-    async Task GetPropertiesAsync()
+    public async Task GetPropertiesAsync()
     {
         if (IsBusy)
             return;
@@ -36,19 +36,16 @@ public class PropertyListPageViewModel : BaseViewModel
         {
             IsBusy = true;
 
-            List<Property> properties = service.GetProperties();
+            var properties = service.GetProperties();
 
-            if (PropertiesCollection.Count != 0)
-                PropertiesCollection.Clear();
-
-            foreach (Property property in properties)
+            PropertiesCollection.Clear();
+            foreach (var property in properties)
                 PropertiesCollection.Add(new PropertyListItem(property));
-
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Unable to get monkeys: {ex.Message}");
-            await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+            Debug.WriteLine($"Unable to get properties: {ex.Message}");
+            await Shell.Current.DisplayAlertAsync("Error!", ex.Message, "OK");
         }
         finally
         {
@@ -57,8 +54,10 @@ public class PropertyListPageViewModel : BaseViewModel
         }
     }
 
+    private Command<PropertyListItem> goToDetailsCommand;
+    public ICommand GoToDetailsCommand => goToDetailsCommand ??= new Command<PropertyListItem>(async (item) => await GoToDetails(item));
 
-    async Task GoToDetails(PropertyListItem propertyListItem)
+    public async Task GoToDetails(PropertyListItem propertyListItem)
     {
         if (propertyListItem == null)
             return;
@@ -71,7 +70,8 @@ public class PropertyListPageViewModel : BaseViewModel
 
     private Command goToAddPropertyCommand;
     public ICommand GoToAddPropertyCommand => goToAddPropertyCommand ??= new Command(async () => await GotoAddProperty());
-    async Task GotoAddProperty()
+
+    public async Task GotoAddProperty()
     {
         await Shell.Current.GoToAsync($"{nameof(AddEditPropertyPage)}?mode=newproperty", true, new Dictionary<string, object>
         {

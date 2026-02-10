@@ -6,34 +6,43 @@
     xmlns:fa="clr-namespace:FontAwesome"
     xmlns:vm="clr-namespace:RealEstateApp.ViewModels"
     Title="{Binding Property.Address}"
+    BackgroundColor="#F5F5F5"
     x:DataType="vm:PropertyDetailPageViewModel">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding EditPropertyCommand}" Text="Edit" />
     </ContentPage.ToolbarItems>
 
-    <ScrollView>
+    <ScrollView BackgroundColor="#F5F5F5">
         <Grid
             Padding="15"
-            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+            BackgroundColor="#F5F5F5"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
             RowSpacing="10">
+            
             <Image
                 Grid.Row="0"
-                Margin="-10,-10,-10,0"
+                Margin="-15,-15,-15,0"
                 Aspect="AspectFill"
                 HeightRequest="225"
                 Source="{Binding Property.MainImageUrl}" />
+            
             <Label
                 Grid.Row="1"
                 FontAttributes="Bold"
-                FontSize="16"
+                FontSize="18"
                 LineBreakMode="NoWrap"
-                Text="{Binding Property.Price, StringFormat='{0:C0}'}" />
+                Text="{Binding Property.Price, StringFormat='{0:C0}'}"
+                TextColor="#2E7D32" />
+            
             <Label
                 Grid.Row="2"
                 FontSize="16"
+                FontAttributes="Bold"
                 LineBreakMode="NoWrap"
-                Text="{Binding Property.Address}" />
+                Text="{Binding Property.Address}"
+                TextColor="#1F1F1F" />
+            
             <Grid
                 Grid.Row="3"
                 ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
@@ -42,53 +51,68 @@
                     Grid.Column="0"
                     FontFamily="FA-solid"
                     FontSize="16"
-                    Text="{Static fa:IconFont.Bed}"
+                    Text="{x:Static fa:IconFont.Bed}"
+                    TextColor="#757575"
                     VerticalOptions="Center" />
                 <Label
                     Grid.Column="1"
-                    FontSize="16"
-                    Text="{Binding Property.Beds}" />
+                    FontSize="14"
+                    Text="{Binding Property.Beds}"
+                    TextColor="#424242" />
                 <Label
                     Grid.Column="2"
                     FontFamily="FA-solid"
                     FontSize="16"
-                    Text="{Static fa:IconFont.Bath}"
+                    Text="{x:Static fa:IconFont.Bath}"
+                    TextColor="#757575"
                     VerticalOptions="Center" />
                 <Label
                     Grid.Column="3"
-                    FontSize="16"
-                    Text="{Binding Property.Baths}" />
+                    FontSize="14"
+                    Text="{Binding Property.Baths}"
+                    TextColor="#424242" />
                 <Label
                     Grid.Column="4"
                     FontFamily="FA-solid"
                     FontSize="16"
-                    Text="{Static fa:IconFont.Parking}"
+                    Text="{x:Static fa:IconFont.Parking}"
+                    TextColor="#757575"
                     VerticalOptions="Center" />
                 <Label
                     Grid.Column="5"
-                    FontSize="16"
-                    Text="{Binding Property.Parking}" />
+                    FontSize="14"
+                    Text="{Binding Property.Parking}"
+                    TextColor="#424242" />
             </Grid>
+            
             <Label
                 Grid.Row="4"
                 FontSize="14"
-                Text="{Binding Property.LandSize, StringFormat='Land size: {0} &#x33a1;'}" />
+                Text="{Binding Property.LandSize, StringFormat='Land size: {0} &#x33a1;'}"
+                TextColor="#757575" />
+            
             <Label
                 Grid.Row="5"
                 Margin="0,20,0,0"
                 FontAttributes="Bold"
-                FontSize="14"
-                Text="Description:" />
+                FontSize="15"
+                Text="Description:"
+                TextColor="#1F1F1F" />
+            
             <Label
                 Grid.Row="6"
                 Margin="0,0,0,20"
                 FontSize="14"
-                Text="{Binding Property.Description}" />
+                Text="{Binding Property.Description}"
+                TextColor="#424242" />
+            
             <Label
                 Grid.Row="7"
                 FontAttributes="Bold"
-                FontSize="14"
-                Text="Listed by:" />
+                FontSize="15"
+                Text="Listed by:"
+                TextColor="#1F1F1F" />
+            
             <Grid Grid.Row="8" ColumnDefinitions="auto, *">
                 <Image
                     Grid.Column="0"
@@ -97,23 +121,28 @@
                     WidthRequest="100" />
                 <Grid
                     Grid.Column="1"
-                    Margin="10"
-                    RowDefinitions="Auto,Auto,Auto">
+                    Margin="10,0,0,0"
+                    RowDefinitions="Auto,Auto,Auto"
+                    RowSpacing="5">
                     <Label
                         Grid.Row="0"
                         FontAttributes="Bold"
-                        FontSize="14"
-                        Text="{Binding Agent.Name}" />
+                        FontSize="15"
+                        Text="{Binding Agent.Name}"
+                        TextColor="#1F1F1F" />
                     <Label
                         Grid.Row="1"
-                        FontSize="12"
-                        Text="{Binding Agent.Email}" />
+                        FontSize="13"
+                        Text="{Binding Agent.Email}"
+                        TextColor="#424242" />
                     <Label
                         Grid.Row="2"
-                        FontSize="12"
-                        Text="{Binding Agent.Phone}" />
+                        FontSize="13"
+                        Text="{Binding Agent.Phone}"
+                        TextColor="#424242" />
                 </Grid>
             </Grid>
         </Grid>
     </ScrollView>
+
 </ContentPage>

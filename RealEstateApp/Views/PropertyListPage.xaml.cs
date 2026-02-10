@@ -15,7 +15,6 @@ public partial class PropertyListPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-
-        //vm.GetPropertiesCommand.Execute(null);
+        vm.GetPropertiesCommand.Execute(null);
     }
 }
