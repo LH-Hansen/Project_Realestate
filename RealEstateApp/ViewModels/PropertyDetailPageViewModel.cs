@@ -5,8 +5,7 @@ using System.Windows.Input;
 using Microsoft.Maui.Media;
 using Microsoft.Maui.ApplicationModel.Communication;
 using Microsoft.Maui.ApplicationModel;
-
-
+using Microsoft.Maui.Storage;
 
 namespace RealEstateApp.ViewModels;
 
@@ -90,10 +89,18 @@ public class PropertyDetailPageViewModel : BaseViewModel
 
         try
         {
+            var volume = Preferences.Default.Get("tts_volume", 0.5);
+            var pitch = Preferences.Default.Get("tts_pitch", 1.0);
+
             await TextToSpeech.Default.SpeakAsync(
                 Property.Description,
-                new SpeechOptions { Pitch = 1.0f, Volume = 1.0f },
+                new SpeechOptions
+                {
+                    Pitch = (float)pitch,
+                    Volume = (float)volume
+                },
                 speechToken.Token);
+
         }
         finally
         {
@@ -216,6 +223,7 @@ public class PropertyDetailPageViewModel : BaseViewModel
 
         await Map.Default.OpenAsync(location, options);
     });
+
 
 
 }

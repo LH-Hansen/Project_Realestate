@@ -15,10 +15,12 @@
         <ToolbarItem Text="Add"
                      Command="{Binding GoToAddPropertyCommand}" />
 
-        <!-- ===== NEW ===== Sort button -->
         <ToolbarItem
             IconImageSource="fa_sort_amount_asc.png"
             Command="{Binding SortCommand}" />
+
+        <ToolbarItem Text="Settings"
+                 Command="{Binding GoToSettingsCommand}" />
 
     </ContentPage.ToolbarItems>
 
@@ -56,21 +58,18 @@
 
                             <Grid ColumnDefinitions="Auto,*">
 
-                                <!-- Property Image -->
                                 <Image Grid.Column="0"
                                        Aspect="AspectFill"
                                        HeightRequest="120"
                                        WidthRequest="120"
                                        Source="{Binding Property.MainImageUrl}" />
 
-                                <!-- Right content -->
                                 <Grid Grid.Column="1"
                                       Padding="12"
                                       BackgroundColor="White"
                                     RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"
                                       RowSpacing="6">
 
-                                    <!-- Address -->
                                     <Label Grid.Row="0"
                                            FontAttributes="Bold"
                                            FontSize="16"
@@ -78,7 +77,6 @@
                                            Text="{Binding Property.Address}"
                                            TextColor="#1F1F1F" />
 
-                                    <!-- Price -->
                                     <Label Grid.Row="1"
                                            FontAttributes="Bold"
                                            FontSize="15"
@@ -86,7 +84,6 @@
                                            StringFormat='{0:C0}'}"
                                            TextColor="#2E7D32" />
 
-                                    <!-- Beds / Baths / Parking -->
                                     <Grid Grid.Row="2"
                                           ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
                                           ColumnSpacing="8">
@@ -110,14 +107,12 @@
                                                Text="{Binding Property.Parking}" />
                                     </Grid>
 
-                                    <!-- Land size -->
                                     <Label Grid.Row="3"
                                            FontSize="12"
                                            Text="{Binding Property.LandSize,
                                            StringFormat='Land Size: {0} &#x33a1;'}"
                                            TextColor="#757575" />
 
-                                    <!-- ===== NEW ===== Distance -->
                                     <Label Grid.Row="4"
                                            FontSize="12"
                                            Text="{Binding Distance,

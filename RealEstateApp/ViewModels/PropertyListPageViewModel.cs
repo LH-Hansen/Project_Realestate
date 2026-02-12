@@ -27,18 +27,15 @@ public class PropertyListPageViewModel : BaseViewModel
         set => SetProperty(ref isRefreshing, value);
     }
 
-    // ===== NEW =====
     Location _currentLocation;
 
     private Command getPropertiesCommand;
     public ICommand GetPropertiesCommand =>
         getPropertiesCommand ??= new Command(async () => await GetPropertiesAsync());
 
-    // ===== NEW ===== Sort button command
     public ICommand SortCommand =>
         new Command(async () => await SortAsync());
 
-    // ===== NEW ===== Sort logic
     async Task SortAsync()
     {
         _currentLocation =
@@ -68,7 +65,6 @@ public class PropertyListPageViewModel : BaseViewModel
             {
                 var item = new PropertyListItem(property);
 
-                // ===== NEW ===== Distance calculation
                 if (_currentLocation != null &&
                     property.Latitude != null &&
                     property.Longitude != null)
@@ -87,7 +83,6 @@ public class PropertyListPageViewModel : BaseViewModel
                 PropertiesCollection.Add(item);
             }
 
-            // ===== NEW ===== sorting
             var sorted =
                 PropertiesCollection.OrderBy(p => p.Distance).ToList();
 
@@ -141,4 +136,12 @@ public class PropertyListPageViewModel : BaseViewModel
                 {"MyProperty", new Property() }
             });
     }
+
+    private Command goToSettingsCommand;
+
+    public ICommand GoToSettingsCommand =>
+        goToSettingsCommand ??=
+            new Command(async () =>
+                await Shell.Current.GoToAsync(nameof(SettingsPage)));
+
 }

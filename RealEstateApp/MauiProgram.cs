@@ -30,6 +30,10 @@ public static class MauiProgram
         builder.Services.AddTransient<AddEditPropertyPage>();
         builder.Services.AddTransient<AddEditPropertyPageViewModel>();
 
+        builder.Services.AddTransient<SettingsPage>();
+        builder.Services.AddTransient<SettingsViewModel>();
+
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
