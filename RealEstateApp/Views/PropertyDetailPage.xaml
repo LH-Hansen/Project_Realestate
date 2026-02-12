@@ -17,7 +17,7 @@
 
         <Grid Padding="15"
               BackgroundColor="#F5F5F5"
-              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
               RowSpacing="10">
 
             <!-- Image -->
@@ -102,15 +102,30 @@
                         IsVisible="{Binding IsSpeaking}" />
             </StackLayout>
 
+            <StackLayout Grid.Row="8"
+             Orientation="Horizontal"
+             Spacing="10">
+
+                <Button FontFamily="FA-solid"
+            Text="{x:Static fa:IconFont.MapMarkedAlt}"
+            Command="{Binding OpenMapCommand}" />
+
+                <Button FontFamily="FA-solid"
+            Text="{x:Static fa:IconFont.Directions}"
+            Command="{Binding OpenNavigationCommand}" />
+
+            </StackLayout>
+
+
             <!-- Vendor header -->
-            <Label Grid.Row="8"
+            <Label Grid.Row="9"
                    FontAttributes="Bold"
                    FontSize="15"
                    Text="Vendor:"
                    TextColor="#1F1F1F" />
 
             <!-- Vendor info -->
-            <StackLayout Grid.Row="9" Spacing="4">
+            <StackLayout Grid.Row="10" Spacing="4">
 
                 <Label Text="{Binding Property.Vendor.FullName}" />
 
@@ -135,14 +150,14 @@
             </StackLayout>
 
             <!-- Listed by -->
-            <Label Grid.Row="10"
+            <Label Grid.Row="11"
                    FontAttributes="Bold"
                    FontSize="15"
                    Text="Listed by:"
                    TextColor="#1F1F1F" />
 
             <!-- Agent -->
-            <Grid Grid.Row="11"
+            <Grid Grid.Row="12"
                   ColumnDefinitions="Auto,*">
 
                 <Image Grid.Column="0"

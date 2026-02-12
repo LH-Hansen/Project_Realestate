@@ -7,6 +7,7 @@ using Microsoft.Maui.ApplicationModel.Communication;
 using Microsoft.Maui.ApplicationModel;
 
 
+
 namespace RealEstateApp.ViewModels;
 
 [QueryProperty(nameof(PropertyListItem), "MyPropertyListItem")]
@@ -179,6 +180,41 @@ public class PropertyDetailPageViewModel : BaseViewModel
             await Shell.Current.DisplayAlert("Error",
                 "Email not supported.", "OK");
         }
+    });
+
+    public ICommand OpenMapCommand => new Command(async () =>
+    {
+        if (Property?.Latitude == null || Property?.Longitude == null)
+            return;
+
+        var location = new Location(
+            Property.Latitude.Value,
+            Property.Longitude.Value);
+
+        var options = new MapLaunchOptions
+        {
+            Name = Property.Address
+        };
+
+        await Map.Default.OpenAsync(location, options);
+    });
+
+    public ICommand OpenNavigationCommand => new Command(async () =>
+    {
+        if (Property?.Latitude == null || Property?.Longitude == null)
+            return;
+
+        var location = new Location(
+            Property.Latitude.Value,
+            Property.Longitude.Value);
+
+        var options = new MapLaunchOptions
+        {
+            Name = Property.Address,
+            NavigationMode = NavigationMode.Driving
+        };
+
+        await Map.Default.OpenAsync(location, options);
     });
 
 
