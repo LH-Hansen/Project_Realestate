@@ -56,7 +56,7 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-
+                    
                     <Grid ColumnDefinitions="*,*,Auto,Auto"
                           ColumnSpacing="10">
 
@@ -90,6 +90,14 @@
                                 HeightRequest="50"
                                 VerticalOptions="Center"/>
                     </Grid>
+
+                    <Button FontFamily="FA-solid"
+        Text="{x:Static fa:IconFont.DraftingCompass}"
+        TextColor="White"
+        BackgroundColor="#673AB7"
+        HeightRequest="45"
+        CornerRadius="8" />
+
 
                     <Label Text="Price*" />
                     <Entry BackgroundColor="White"
