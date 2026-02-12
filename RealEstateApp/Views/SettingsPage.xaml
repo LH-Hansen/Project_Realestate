@@ -1,0 +1,29 @@
+<ContentPage
+    x:Class="RealEstateApp.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:RealEstateApp.ViewModels"
+    x:DataType="vm:SettingsViewModel"
+    Title="Settings">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <Label Text="Volume" FontAttributes="Bold"/>
+        <Slider Minimum="0"
+                Maximum="1"
+                Value="{Binding Volume}" />
+
+        <Label Text="{Binding Volume, StringFormat='Volume: {0:F2}'}"/>
+
+        <Label Text="Pitch" FontAttributes="Bold"/>
+        <Slider Minimum="0.1"
+                Maximum="2"
+                Value="{Binding Pitch}" />
+
+        <Label Text="{Binding Pitch, StringFormat='Pitch: {0:F2}'}"/>
+
+        <Button Text="Reset to default"
+                Command="{Binding ResetCommand}" />
+
+    </VerticalStackLayout>
+</ContentPage>
