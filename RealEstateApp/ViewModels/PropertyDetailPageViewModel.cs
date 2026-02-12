@@ -3,6 +3,9 @@ using RealEstateApp.Services;
 using RealEstateApp.Views;
 using System.Windows.Input;
 using Microsoft.Maui.Media;
+using Microsoft.Maui.ApplicationModel.Communication;
+using Microsoft.Maui.ApplicationModel;
+
 
 namespace RealEstateApp.ViewModels;
 
@@ -56,10 +59,6 @@ public class PropertyDetailPageViewModel : BaseViewModel
             new Dictionary<string, object> { { "MyProperty", Property } });
     }
 
-    // =========================
-    // ===== SPEECH (NEW) ======
-    // =========================
-
     bool isSpeaking;
     public bool IsSpeaking
     {
@@ -67,11 +66,10 @@ public class PropertyDetailPageViewModel : BaseViewModel
         set
         {
             if (SetProperty(ref isSpeaking, value))
-                OnPropertyChanged(nameof(IsNotSpeaking)); // keep UI in sync
+                OnPropertyChanged(nameof(IsNotSpeaking)); 
         }
     }
 
-    // NEW: no converter needed
     public bool IsNotSpeaking => !IsSpeaking;
 
     CancellationTokenSource speechToken;
@@ -107,4 +105,81 @@ public class PropertyDetailPageViewModel : BaseViewModel
         speechToken?.Cancel();
         IsSpeaking = false;
     }
+
+    public ICommand VendorPhoneCommand => new Command(async () =>
+    {
+        if (Property?.Vendor == null)
+            return;
+
+        string action = await Shell.Current.DisplayActionSheet(
+            Property.Vendor.Phone,
+            "Cancel",
+            null,
+            "Call",
+            "SMS");
+
+        if (action == "Call")
+        {
+            try
+            {
+                PhoneDialer.Default.Open(Property.Vendor.Phone);
+            }
+            catch
+            {
+                await Shell.Current.DisplayAlert("Error",
+                    "Calling not supported.", "OK");
+            }
+        }
+        else if (action == "SMS")
+        {
+            try
+            {
+                var message = new SmsMessage(
+                    $"Hej, {Property.Vendor.FirstName}, angående {Property.Address}",
+                    Property.Vendor.Phone);
+
+                await Sms.Default.ComposeAsync(message);
+            }
+            catch
+            {
+                await Shell.Current.DisplayAlert("Error",
+                    "SMS not supported.", "OK");
+            }
+        }
+    });
+
+    public ICommand VendorEmailCommand => new Command(async () =>
+    {
+        if (Property?.Vendor == null)
+            return;
+
+        try
+        {
+            var folder = Environment.GetFolderPath(
+                Environment.SpecialFolder.MyDocuments);
+
+            var filePath = Path.Combine(folder, "property.txt");
+
+            File.WriteAllText(filePath, Property.Address);
+
+            var email = new EmailMessage
+            {
+                Subject = "Property information",
+                Body = "See attached property details.",
+                To = new List<string> { Property.Vendor.Email }
+            };
+
+            email.Attachments.Add(
+                new EmailAttachment(filePath));
+
+            await Email.Default.ComposeAsync(email);
+        }
+        catch
+        {
+            await Shell.Current.DisplayAlert("Error",
+                "Email not supported.", "OK");
+        }
+    });
+
+
 }

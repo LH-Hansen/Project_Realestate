@@ -17,27 +17,31 @@
 
         <Grid Padding="15"
               BackgroundColor="#F5F5F5"
-              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
               RowSpacing="10">
 
+            <!-- Image -->
             <Image Grid.Row="0"
                    Margin="-15,-15,-15,0"
                    Aspect="AspectFill"
                    HeightRequest="225"
                    Source="{Binding Property.MainImageUrl}" />
 
+            <!-- Price -->
             <Label Grid.Row="1"
                    FontAttributes="Bold"
                    FontSize="18"
                    Text="{Binding Property.Price, StringFormat='{0:C0}'}"
                    TextColor="#2E7D32" />
 
+            <!-- Address -->
             <Label Grid.Row="2"
                    FontSize="16"
                    FontAttributes="Bold"
                    Text="{Binding Property.Address}"
                    TextColor="#1F1F1F" />
 
+            <!-- Beds/Baths/Parking -->
             <Grid Grid.Row="3"
                   ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
                   ColumnSpacing="10">
@@ -61,11 +65,13 @@
                        Text="{Binding Property.Parking}" />
             </Grid>
 
+            <!-- Land size -->
             <Label Grid.Row="4"
                    Text="{Binding Property.LandSize,
                           StringFormat='Land size: {0} &#x33a1;'}"
                    TextColor="#757575" />
 
+            <!-- Description header -->
             <Label Grid.Row="5"
                    Margin="0,20,0,0"
                    FontAttributes="Bold"
@@ -73,35 +79,70 @@
                    Text="Description:"
                    TextColor="#1F1F1F" />
 
+            <!-- Description text -->
             <Label Grid.Row="6"
                    Margin="0,0,0,20"
                    FontSize="14"
                    Text="{Binding Property.Description}"
                    TextColor="#424242" />
 
+            <!-- Speech controls -->
             <StackLayout Grid.Row="7"
-             Orientation="Horizontal"
-             Spacing="10">
+                         Orientation="Horizontal"
+                         Spacing="10">
 
                 <Button FontFamily="FA-solid"
-            Text="{x:Static fa:IconFont.Play}"
-            Command="{Binding SpeakCommand}"
-            IsVisible="{Binding IsNotSpeaking}" />
+                        Text="{x:Static fa:IconFont.Play}"
+                        Command="{Binding SpeakCommand}"
+                        IsVisible="{Binding IsNotSpeaking}" />
 
                 <Button FontFamily="FA-solid"
-            Text="{x:Static fa:IconFont.Stop}"
-            Command="{Binding StopCommand}"
-            IsVisible="{Binding IsSpeaking}" />
+                        Text="{x:Static fa:IconFont.Stop}"
+                        Command="{Binding StopCommand}"
+                        IsVisible="{Binding IsSpeaking}" />
             </StackLayout>
 
-
+            <!-- Vendor header -->
             <Label Grid.Row="8"
+                   FontAttributes="Bold"
+                   FontSize="15"
+                   Text="Vendor:"
+                   TextColor="#1F1F1F" />
+
+            <!-- Vendor info -->
+            <StackLayout Grid.Row="9" Spacing="4">
+
+                <Label Text="{Binding Property.Vendor.FullName}" />
+
+                <Label Text="{Binding Property.Vendor.Email}"
+       TextColor="Blue">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+            Command="{Binding VendorEmailCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+
+                <Label Text="{Binding Property.Vendor.Phone}"
+       TextColor="Blue">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+            Command="{Binding VendorPhoneCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+
+            </StackLayout>
+
+            <!-- Listed by -->
+            <Label Grid.Row="10"
                    FontAttributes="Bold"
                    FontSize="15"
                    Text="Listed by:"
                    TextColor="#1F1F1F" />
 
-            <Grid Grid.Row="9"
+            <!-- Agent -->
+            <Grid Grid.Row="11"
                   ColumnDefinitions="Auto,*">
 
                 <Image Grid.Column="0"
