@@ -15,11 +15,18 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     {
         this.service = service;
         Agents = new ObservableCollection<Agent>(service.GetAgents());
+
+        GetLocationCommand = new Command(async () =>
+        {
+            if (GetLocationAction != null)
+                await GetLocationAction();
+        });
     }
 
     public string Mode { get; set; }
 
     #region PROPERTIES
+
     public ObservableCollection<Agent> Agents { get; }
 
     private Property _property;
@@ -31,9 +38,10 @@ public class AddEditPropertyPageViewModel : BaseViewModel
             SetProperty(ref _property, value);
             Title = Mode == "newproperty" ? "Add Property" : "Edit Property";
 
-            if (_property.AgentId != null)
+            if (_property?.AgentId != null)
             {
-                SelectedAgent = Agents.FirstOrDefault(x => x.Id == _property?.AgentId);
+                SelectedAgent =
+                    Agents.FirstOrDefault(x => x.Id == _property.AgentId);
             }
         }
     }
@@ -55,26 +63,40 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     string statusMessage;
     public string StatusMessage
     {
-        get { return statusMessage; }
-        set { SetProperty(ref statusMessage, value); }
+        get => statusMessage;
+        set => SetProperty(ref statusMessage, value);
     }
 
     Color statusColor;
     public Color StatusColor
     {
-        get { return statusColor; }
-        set { SetProperty(ref statusColor, value); }
+        get => statusColor;
+        set => SetProperty(ref statusColor, value);
     }
+
     #endregion
 
+    #region LOCATION
+
+    public ICommand GetLocationCommand { get; }
+    public Func<Task> GetLocationAction { get; set; }
+
+    public void RefreshProperty()
+    {
+        OnPropertyChanged(nameof(Property));
+    }
+
+    #endregion
 
     private Command savePropertyCommand;
-    public ICommand SavePropertyCommand => savePropertyCommand ??= new Command(async () => await SaveProperty());
+    public ICommand SavePropertyCommand =>
+        savePropertyCommand ??= new Command(async () => await SaveProperty());
+
     private async Task SaveProperty()
     {
-        if (IsValid() == false)
+        if (!IsValid())
         {
-           StatusMessage = "Please fill in all required fields";
+            StatusMessage = "Please fill in all required fields";
             StatusColor = Colors.Red;
         }
         else
@@ -91,9 +113,12 @@ public class AddEditPropertyPageViewModel : BaseViewModel
             || Property.Price == null
             || Property.AgentId == null)
             return false;
+
         return true;
     }
 
     private Command cancelSaveCommand;
-    public ICommand CancelSaveCommand => cancelSaveCommand ??= new Command(async () => await Shell.Current.GoToAsync(".."));
+    public ICommand CancelSaveCommand =>
+        cancelSaveCommand ??= new Command(async () =>
+            await Shell.Current.GoToAsync(".."));
 }
