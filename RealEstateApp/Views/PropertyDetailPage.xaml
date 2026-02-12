@@ -14,134 +14,121 @@
     </ContentPage.ToolbarItems>
 
     <ScrollView BackgroundColor="#F5F5F5">
-        <Grid
-            Padding="15"
-            BackgroundColor="#F5F5F5"
-            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
-            RowSpacing="10">
-            
-            <Image
-                Grid.Row="0"
-                Margin="-15,-15,-15,0"
-                Aspect="AspectFill"
-                HeightRequest="225"
-                Source="{Binding Property.MainImageUrl}" />
-            
-            <Label
-                Grid.Row="1"
-                FontAttributes="Bold"
-                FontSize="18"
-                LineBreakMode="NoWrap"
-                Text="{Binding Property.Price, StringFormat='{0:C0}'}"
-                TextColor="#2E7D32" />
-            
-            <Label
-                Grid.Row="2"
-                FontSize="16"
-                FontAttributes="Bold"
-                LineBreakMode="NoWrap"
-                Text="{Binding Property.Address}"
-                TextColor="#1F1F1F" />
-            
-            <Grid
-                Grid.Row="3"
-                ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
-                ColumnSpacing="10">
-                <Label
-                    Grid.Column="0"
-                    FontFamily="FA-solid"
-                    FontSize="16"
-                    Text="{x:Static fa:IconFont.Bed}"
-                    TextColor="#757575"
-                    VerticalOptions="Center" />
-                <Label
-                    Grid.Column="1"
-                    FontSize="14"
-                    Text="{Binding Property.Beds}"
-                    TextColor="#424242" />
-                <Label
-                    Grid.Column="2"
-                    FontFamily="FA-solid"
-                    FontSize="16"
-                    Text="{x:Static fa:IconFont.Bath}"
-                    TextColor="#757575"
-                    VerticalOptions="Center" />
-                <Label
-                    Grid.Column="3"
-                    FontSize="14"
-                    Text="{Binding Property.Baths}"
-                    TextColor="#424242" />
-                <Label
-                    Grid.Column="4"
-                    FontFamily="FA-solid"
-                    FontSize="16"
-                    Text="{x:Static fa:IconFont.Parking}"
-                    TextColor="#757575"
-                    VerticalOptions="Center" />
-                <Label
-                    Grid.Column="5"
-                    FontSize="14"
-                    Text="{Binding Property.Parking}"
-                    TextColor="#424242" />
+
+        <Grid Padding="15"
+              BackgroundColor="#F5F5F5"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+              RowSpacing="10">
+
+            <Image Grid.Row="0"
+                   Margin="-15,-15,-15,0"
+                   Aspect="AspectFill"
+                   HeightRequest="225"
+                   Source="{Binding Property.MainImageUrl}" />
+
+            <Label Grid.Row="1"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   Text="{Binding Property.Price, StringFormat='{0:C0}'}"
+                   TextColor="#2E7D32" />
+
+            <Label Grid.Row="2"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   Text="{Binding Property.Address}"
+                   TextColor="#1F1F1F" />
+
+            <Grid Grid.Row="3"
+                  ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                  ColumnSpacing="10">
+
+                <Label Grid.Column="0"
+                       FontFamily="FA-solid"
+                       Text="{x:Static fa:IconFont.Bed}" />
+                <Label Grid.Column="1"
+                       Text="{Binding Property.Beds}" />
+
+                <Label Grid.Column="2"
+                       FontFamily="FA-solid"
+                       Text="{x:Static fa:IconFont.Bath}" />
+                <Label Grid.Column="3"
+                       Text="{Binding Property.Baths}" />
+
+                <Label Grid.Column="4"
+                       FontFamily="FA-solid"
+                       Text="{x:Static fa:IconFont.Parking}" />
+                <Label Grid.Column="5"
+                       Text="{Binding Property.Parking}" />
             </Grid>
-            
-            <Label
-                Grid.Row="4"
-                FontSize="14"
-                Text="{Binding Property.LandSize, StringFormat='Land size: {0} &#x33a1;'}"
-                TextColor="#757575" />
-            
-            <Label
-                Grid.Row="5"
-                Margin="0,20,0,0"
-                FontAttributes="Bold"
-                FontSize="15"
-                Text="Description:"
-                TextColor="#1F1F1F" />
-            
-            <Label
-                Grid.Row="6"
-                Margin="0,0,0,20"
-                FontSize="14"
-                Text="{Binding Property.Description}"
-                TextColor="#424242" />
-            
-            <Label
-                Grid.Row="7"
-                FontAttributes="Bold"
-                FontSize="15"
-                Text="Listed by:"
-                TextColor="#1F1F1F" />
-            
-            <Grid Grid.Row="8" ColumnDefinitions="auto, *">
-                <Image
-                    Grid.Column="0"
-                    Source="{Binding Agent.ImageUrl}"
-                    VerticalOptions="Start"
-                    WidthRequest="100" />
-                <Grid
-                    Grid.Column="1"
-                    Margin="10,0,0,0"
-                    RowDefinitions="Auto,Auto,Auto"
-                    RowSpacing="5">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="15"
-                        Text="{Binding Agent.Name}"
-                        TextColor="#1F1F1F" />
-                    <Label
-                        Grid.Row="1"
-                        FontSize="13"
-                        Text="{Binding Agent.Email}"
-                        TextColor="#424242" />
-                    <Label
-                        Grid.Row="2"
-                        FontSize="13"
-                        Text="{Binding Agent.Phone}"
-                        TextColor="#424242" />
+
+            <Label Grid.Row="4"
+                   Text="{Binding Property.LandSize,
+                          StringFormat='Land size: {0} &#x33a1;'}"
+                   TextColor="#757575" />
+
+            <Label Grid.Row="5"
+                   Margin="0,20,0,0"
+                   FontAttributes="Bold"
+                   FontSize="15"
+                   Text="Description:"
+                   TextColor="#1F1F1F" />
+
+            <Label Grid.Row="6"
+                   Margin="0,0,0,20"
+                   FontSize="14"
+                   Text="{Binding Property.Description}"
+                   TextColor="#424242" />
+
+            <StackLayout Grid.Row="7"
+             Orientation="Horizontal"
+             Spacing="10">
+
+                <Button FontFamily="FA-solid"
+            Text="{x:Static fa:IconFont.Play}"
+            Command="{Binding SpeakCommand}"
+            IsVisible="{Binding IsNotSpeaking}" />
+
+                <Button FontFamily="FA-solid"
+            Text="{x:Static fa:IconFont.Stop}"
+            Command="{Binding StopCommand}"
+            IsVisible="{Binding IsSpeaking}" />
+            </StackLayout>
+
+
+            <Label Grid.Row="8"
+                   FontAttributes="Bold"
+                   FontSize="15"
+                   Text="Listed by:"
+                   TextColor="#1F1F1F" />
+
+            <Grid Grid.Row="9"
+                  ColumnDefinitions="Auto,*">
+
+                <Image Grid.Column="0"
+                       Source="{Binding Agent.ImageUrl}"
+                       VerticalOptions="Start"
+                       WidthRequest="100" />
+
+                <Grid Grid.Column="1"
+                      Margin="10,0,0,0"
+                      RowDefinitions="Auto,Auto,Auto"
+                      RowSpacing="5">
+
+                    <Label Grid.Row="0"
+                           FontAttributes="Bold"
+                           FontSize="15"
+                           Text="{Binding Agent.Name}" />
+
+                    <Label Grid.Row="1"
+                           FontSize="13"
+                           Text="{Binding Agent.Email}" />
+
+                    <Label Grid.Row="2"
+                           FontSize="13"
+                           Text="{Binding Agent.Phone}" />
                 </Grid>
             </Grid>
+
         </Grid>
     </ScrollView>
 
