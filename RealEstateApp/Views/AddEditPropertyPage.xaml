@@ -17,6 +17,7 @@
 
     <ContentPage.Content>
         <StackLayout BackgroundColor="#F5F5F5">
+
             <Label
                 BackgroundColor="{Binding StatusColor}"
                 IsVisible="{Binding StatusMessage, Converter={converters:StringBoolConverter}}"
@@ -26,7 +27,6 @@
             <ScrollView VerticalOptions="FillAndExpand">
                 <StackLayout Padding="15" Spacing="20">
 
-                    <!-- Address -->
                     <Label>
                         <Label.FormattedText>
                             <FormattedString>
@@ -42,93 +42,89 @@
                         Placeholder="Enter address"
                         Text="{Binding Property.Address}" />
 
-                    <!-- Location -->
                     <Label FontSize="Medium" TextColor="#1F1F1F">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span FontFamily="FA-solid"
-                  FontSize="14"
-                  Text="{x:Static fa:IconFont.LocationArrow}"
-                  TextColor="#757575" />
+                                      FontSize="14"
+                                      Text="{x:Static fa:IconFont.LocationArrow}"
+                                      TextColor="#757575" />
                                 <Span Text=" " />
                                 <Span FontSize="14"
-                  Text="Location"
-                  TextColor="#1F1F1F" />
+                                      Text="Location"
+                                      TextColor="#1F1F1F" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
 
-                    <Grid ColumnDefinitions="*,*,Auto"
-      ColumnSpacing="10">
+                    <Grid ColumnDefinitions="*,*,Auto,Auto"
+                          ColumnSpacing="10">
 
                         <Entry Grid.Column="0"
-           BackgroundColor="White"
-           IsReadOnly="True"
-           Text="{Binding Property.Latitude}"
-           TextColor="#1F1F1F"
-           Placeholder="Latitude"
-           PlaceholderColor="#BDBDBD"/>
+                               BackgroundColor="White"
+                               IsReadOnly="True"
+                               Text="{Binding Property.Latitude}"
+                               Placeholder="Latitude"
+                               PlaceholderColor="#BDBDBD"/>
 
                         <Entry Grid.Column="1"
-           BackgroundColor="White"
-           IsReadOnly="True"
-           Text="{Binding Property.Longitude}"
-           TextColor="#1F1F1F"
-           Placeholder="Longitude"
-           PlaceholderColor="#BDBDBD"/>
+                               BackgroundColor="White"
+                               IsReadOnly="True"
+                               Text="{Binding Property.Longitude}"
+                               Placeholder="Longitude"
+                               PlaceholderColor="#BDBDBD"/>
 
                         <Button Grid.Column="2"
-            Command="{Binding GetLocationCommand}"
-            FontFamily="FA-solid"
-            Text="{x:Static fa:IconFont.Thumbtack}"
-            WidthRequest="50"
-            HeightRequest="50"
-            VerticalOptions="Center"/>
+                                Command="{Binding GetLocationCommand}"
+                                FontFamily="FA-solid"
+                                Text="{x:Static fa:IconFont.Thumbtack}"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                VerticalOptions="Center"/>
+
+                        <Button Grid.Column="3"
+                                Command="{Binding GetCoordinatesFromAddressCommand}"
+                                FontFamily="FA-solid"
+                                Text="{x:Static fa:IconFont.Home}"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                VerticalOptions="Center"/>
                     </Grid>
 
-
-                    <!-- Remaining existing fields unchanged -->
-                    <!-- Price -->
                     <Label Text="Price*" />
                     <Entry BackgroundColor="White"
                            Keyboard="Numeric"
                            Text="{Binding Property.Price,
                            Converter={converters:NullableIntConverter}}" />
 
-                    <!-- Bedrooms -->
                     <Label Text="Bedrooms*" />
                     <Entry BackgroundColor="White"
                            Keyboard="Numeric"
                            Text="{Binding Property.Beds,
                            Converter={converters:NullableIntConverter}}" />
 
-                    <!-- Bathrooms -->
                     <Label Text="Bathrooms" />
                     <Entry BackgroundColor="White"
                            Keyboard="Numeric"
                            Text="{Binding Property.Baths,
                            Converter={converters:NullableIntConverter}}" />
 
-                    <!-- Parking -->
                     <Label Text="Parking" />
                     <Entry BackgroundColor="White"
                            Keyboard="Numeric"
                            Text="{Binding Property.Parking,
                            Converter={converters:NullableIntConverter}}" />
 
-                    <!-- Land Size -->
                     <Label Text="Land Size" />
                     <Entry BackgroundColor="White"
                            Keyboard="Numeric"
                            Text="{Binding Property.LandSize,
                            Converter={converters:NullableIntConverter}}" />
 
-                    <!-- Description -->
                     <Label Text="Description" />
                     <Editor BackgroundColor="White"
                             Text="{Binding Property.Description}" />
 
-                    <!-- Agent -->
                     <Label Text="Agent*" />
                     <Picker BackgroundColor="White"
                             ItemsSource="{Binding Agents}"
