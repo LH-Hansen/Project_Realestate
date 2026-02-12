@@ -21,6 +21,13 @@ public class AddEditPropertyPageViewModel : BaseViewModel
             if (GetLocationAction != null)
                 await GetLocationAction();
         });
+
+        // ===== NEW ===== initialize Home command
+        GetCoordinatesFromAddressCommand = new Command(async () =>
+        {
+            if (GetCoordinatesFromAddressAction != null)
+                await GetCoordinatesFromAddressAction();
+        });
     }
 
     public string Mode { get; set; }
@@ -80,6 +87,9 @@ public class AddEditPropertyPageViewModel : BaseViewModel
 
     public ICommand GetLocationCommand { get; }
     public Func<Task> GetLocationAction { get; set; }
+
+    public ICommand GetCoordinatesFromAddressCommand { get; }
+    public Func<Task> GetCoordinatesFromAddressAction { get; set; }
 
     public void RefreshProperty()
     {
