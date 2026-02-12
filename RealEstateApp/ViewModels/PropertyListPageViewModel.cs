@@ -144,4 +144,12 @@ public class PropertyListPageViewModel : BaseViewModel
             new Command(async () =>
                 await Shell.Current.GoToAsync(nameof(SettingsPage)));
 
+    public ICommand LogoutCommand =>
+    new Command(async () =>
+    {
+        LoginViewModel.Logout();
+        await Shell.Current.GoToAsync(nameof(LoginPage));
+    });
+
+
 }
