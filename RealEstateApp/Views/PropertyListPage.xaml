@@ -22,6 +22,9 @@
         <ToolbarItem Text="Settings"
                  Command="{Binding GoToSettingsCommand}" />
 
+        <ToolbarItem Text="Logout"
+                 Command="{Binding LogoutCommand}" />
+
     </ContentPage.ToolbarItems>
 
     <RefreshView Command="{Binding GetPropertiesCommand}"

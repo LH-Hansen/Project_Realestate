@@ -18,7 +18,7 @@
 
     <ShellContent
     Title="Settings"
-    ContentTemplate="{DataTemplate views:SettingsPage}" />
+    ContentTemplate="{DataTemplate views:SettingsPage}"
     Route="settings" />
 
 </Shell>
